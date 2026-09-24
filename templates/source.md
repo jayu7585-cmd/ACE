@@ -9,6 +9,7 @@ kind: paper   # paper | article | book | transcript | note | data
 raw: "raw/papers/"
 created: {{date:YYYY-MM-DD}}
 updated: {{date:YYYY-MM-DD}}
+moc: []       # 소속 MOC 링크 목록 (CLAUDE.md 3.5절)
 status: seed
 ---
 

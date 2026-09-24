@@ -13,7 +13,7 @@ WIKI = ROOT / "wiki"
 REQUIRED = ("type", "title", "created", "updated", "status")
 SPECIAL = {"index", "log", "overview"}
 LINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]")
-CODE_RE = re.compile(r"```.*?```|`[^`\n]*`", re.S)
+CODE_RE = re.compile(r"```.*?```|`[^`\n]*`|<!--.*?-->", re.S)
 
 
 def links(text):

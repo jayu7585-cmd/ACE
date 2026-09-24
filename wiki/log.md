@@ -23,3 +23,10 @@ title: 작업 로그
 - `.claude/skills/wiki-lint/SKILL.md` 생성 (`/wiki-lint`) + 장부 정합성 점검 `scripts/deep_check.py`
 - `scripts/wiki_lint.py`: `outputs/` 파일 링크를 실제 파일 존재로 확인하도록 수정
 - `CLAUDE.md` 4.2·4.3절, 디렉토리 구조, `README.md`에 스킬 안내 반영
+
+## [2026-09-24] schema | MOC 체계 도입
+- 생성: [[홈]], [[판단과 의사결정 MOC]], [[선택 설계와 행동 개입 MOC]], [[학습과학과 인지 MOC]], [[진로 진학 의사결정 MOC]], [[교육 현장 적용 MOC]], [[연구자 MOC]], [[자료 MOC]], [[작업 대시보드]]
+- `templates/moc.md` 추가, 모든 페이지 템플릿에 `moc:` 필드 추가
+- `scripts/moc_check.py` 추가 (양방향 일치, 미배정, 분할·신설 후보 점검)
+- `/wiki-ingest` 7단계, `/wiki-query` 5단계, `/wiki-lint` 1·2·3단계에 MOC 갱신 반영
+- `CLAUDE.md` 3.5절 신설, index.md에 Maps 섹션 추가, 홈·대시보드 책갈피 등록

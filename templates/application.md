@@ -7,6 +7,7 @@ setting: 수업   # 수업 | 상담 | 평가 | 연수 | 연구
 created: {{date:YYYY-MM-DD}}
 updated: {{date:YYYY-MM-DD}}
 sources: 0
+moc: []       # 소속 MOC 링크 목록 (CLAUDE.md 3.5절)
 status: seed
 ---
 

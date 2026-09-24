@@ -6,6 +6,7 @@ tags: [hub]
 created: {{date:YYYY-MM-DD}}
 updated: {{date:YYYY-MM-DD}}
 sources: 0
+moc: []       # 소속 MOC 링크 목록 (CLAUDE.md 3.5절)
 status: seed
 ---
 
