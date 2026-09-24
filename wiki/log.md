@@ -30,3 +30,7 @@ title: 작업 로그
 - `scripts/moc_check.py` 추가 (양방향 일치, 미배정, 분할·신설 후보 점검)
 - `/wiki-ingest` 7단계, `/wiki-query` 5단계, `/wiki-lint` 1·2·3단계에 MOC 갱신 반영
 - `CLAUDE.md` 3.5절 신설, index.md에 Maps 섹션 추가, 홈·대시보드 책갈피 등록
+
+## [2026-09-24] schema | 사람용 운영 지침 mi.md 추가
+- `mi.md` 생성: 운영 루틴(매 세션·매일·매주·매월), 자료 선별 기준, ingest 참여 방법, 질문 유형, 승인 원칙, 탐색 순서, 규칙 개정 방법, 명령 요약
+- `CLAUDE.md` 1절·디렉토리 구조, `README.md`에 연결
