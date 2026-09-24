@@ -12,3 +12,8 @@ title: 작업 로그
 - LLM Wiki 구조 생성: `raw/`, `wiki/`, `templates/`, `outputs/`, `scripts/`
 - `CLAUDE.md` 스키마 초안 작성
 - 생성 페이지: [[index]], [[overview]]
+
+## [2026-09-24] schema | ingest 스킬 등록
+- `.claude/skills/wiki-ingest/SKILL.md` 생성 (`/wiki-ingest`)
+- 미처리 자료 탐지 스크립트 `.claude/skills/wiki-ingest/scripts/pending.py` 추가
+- `CLAUDE.md` 4.1절·8절·디렉토리 구조에 스킬 참조 반영

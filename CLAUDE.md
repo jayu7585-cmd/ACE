@@ -58,7 +58,8 @@ ACE/
 ├── outputs/               # 파생 산출물 (Marp 슬라이드, 차트 이미지 등)
 │   ├── slides/
 │   └── charts/
-└── scripts/               # 보조 도구 (wiki_lint.py 등)
+├── scripts/               # 보조 도구 (wiki_lint.py 등)
+└── .claude/skills/        # 프로젝트 스킬 (wiki-ingest 등)
 ```
 
 [계층 3] 스키마 = 이 `CLAUDE.md`.
@@ -115,6 +116,9 @@ status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 ## 4. 작업 흐름 (Operations)
 
 ### 4.1 Ingest (자료 수집·통합)
+> 상세 절차는 프로젝트 스킬 **`/wiki-ingest`** (`.claude/skills/wiki-ingest/SKILL.md`)에 있다. ingest 요청을 받으면 이 스킬을 불러 따른다.
+> 미처리 자료 확인: `python3 .claude/skills/wiki-ingest/scripts/pending.py`
+
 사용자가 `raw/`에 자료를 넣고 "ingest 해줘"라고 하면:
 
 1. **읽기**: 원자료를 끝까지 읽는다. 이미지가 있으면 텍스트를 먼저 읽고, 필요한 이미지를 따로 확인한다.
@@ -190,9 +194,10 @@ status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 1. 이 `CLAUDE.md`를 읽는다.
 2. `grep "^## \[" wiki/log.md | tail -5`로 최근 작업을 확인한다.
 3. `wiki/index.md`와 `wiki/overview.md`를 훑는다.
-4. `raw/`에 아직 ingest되지 않은 자료가 있는지 확인하고 (source 페이지의 `raw:` 필드와 대조) 있으면 알린다.
+4. `python3 .claude/skills/wiki-ingest/scripts/pending.py`로 아직 ingest되지 않은 자료가 있는지 확인하고, 있으면 알린다.
 
 ---
 
 ## 스키마 변경 이력
 - 2026-09-24: 초기 스키마 작성 (디렉토리 구조, 페이지 규약, ingest/query/lint 흐름)
+- 2026-09-24: ingest 절차를 프로젝트 스킬 `/wiki-ingest`로 분리, 미처리 자료 탐지 스크립트(`pending.py`) 추가
