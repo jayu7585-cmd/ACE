@@ -18,7 +18,10 @@
    | 자료 통합 | `/wiki-ingest` | `/wiki-ingest raw/papers/xxx.pdf`, "raw에 새 자료 넣었어" |
    | 질의 | `/wiki-query` | `/wiki-query 전망이론과 기대효용이론 비교 저장` |
    | 점검 | `/wiki-lint` | `/wiki-lint`, "위키 점검해줘" |
-4. 옵시디언의 그래프 뷰와 `wiki/index.md`에서 결과를 확인합니다.
+4. 옵시디언에서 결과를 확인합니다.
+   - **[[홈]]** (`wiki/maps/홈.md`, 책갈피에 등록됨): 영역별 MOC 지도로 들어가는 출발점
+   - **[[작업 대시보드]]**: MOC 미배정·초안·상충 현황 (Dataview)
+   - 그래프 뷰, `wiki/index.md`
 
 ## 권장 플러그인
 Dataview, Templates(코어, 폴더: `templates`), Marp Slides, Obsidian Web Clipper(브라우저 확장)
@@ -27,4 +30,5 @@ Dataview, Templates(코어, 폴더: `templates`), Marp Slides, Obsidian Web Clip
 ```bash
 grep "^## \[" wiki/log.md | tail -5
 python3 scripts/wiki_lint.py
+python3 scripts/moc_check.py
 ```

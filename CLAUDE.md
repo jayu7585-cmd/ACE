@@ -47,6 +47,7 @@ ACE/
 │   ├── index.md           #   전체 목차 (내용 중심 카탈로그)
 │   ├── log.md             #   작업 연대기 (append-only)
 │   ├── overview.md        #   위키 전체 조망 + 진화하는 핵심 논지
+│   ├── maps/              #   MOC: 홈, 도메인 지도, 작업 대시보드 (3.5절)
 │   ├── sources/           #   원자료 1건당 1개의 요약 페이지
 │   ├── concepts/          #   개념 (예: 손실회피, 앵커링, 인지부하)
 │   ├── theories/          #   이론·모형 (예: 전망이론, 이중과정 이론)
@@ -78,6 +79,7 @@ ACE/
 | topic | `wiki/topics/` | 한국어 주제명 | `휴리스틱과 편향.md` |
 | synthesis | `wiki/syntheses/` | `YYYY-MM-DD-질문요지` | `2026-09-24-넛지와-자율성.md` |
 | application | `wiki/applications/` | 적용 맥락-주제 | `진로상담-프레이밍효과.md` |
+| moc | `wiki/maps/` | `영역명 MOC` (홈만 예외) | `판단과 의사결정 MOC.md` |
 
 - 영어 원어·약어는 파일명이 아니라 frontmatter `aliases`에 넣어 링크·검색이 되게 한다.
 - 새 페이지를 만들기 전에 **반드시 `index.md`와 aliases를 검색해 중복을 확인**한다.
@@ -92,10 +94,13 @@ tags: [jdm, 편향]
 created: 2026-09-24
 updated: 2026-09-24
 sources: 3             # 이 페이지를 뒷받침하는 source 페이지 수
+moc: ["[[판단과 의사결정 MOC]]"]   # 소속 MOC (3.5절). 링크는 따옴표로 감싼다
 status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 ---
 ```
 - source 페이지에는 추가로 `raw:`(원자료 경로), `authors:`, `year:`, `kind:`(paper/article/book/…) 를 넣는다.
+- `moc:`는 concept·theory·topic·person·application·synthesis 페이지에서 필수(1–3개), source 페이지에서는 선택이다.
+- frontmatter 값 안에 `[[링크]]`를 쓸 때는 반드시 따옴표로 감싼다. 따옴표가 없으면 YAML이 `[[`를 목록으로 읽어 frontmatter 전체가 깨진다.
 
 ### 3.3 링크
 - 내부 링크는 항상 위키링크 `[[페이지명]]` 사용. 필요 시 `[[페이지명|표시문]]`.
@@ -110,6 +115,37 @@ status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 - `> [!example] 교육 적용` — 수업·상담 현장에의 적용 아이디어
 
 템플릿은 `templates/` 폴더 참고.
+
+### 3.5 MOC (Map of Contents)
+MOC는 사람이 위키를 **둘러보는 지도**다. 세 가지 탐색 장치의 역할을 구분한다.
+
+| 장치 | 위치 | 성격 | 주 독자 |
+|---|---|---|---|
+| index.md | `wiki/index.md` | 유형별 **전체 목록**. 빠짐없이, 평평하게 | Claude (질의할 때 먼저 읽음) |
+| MOC | `wiki/maps/` | 영역별 **큐레이션 지도**. 논리 순서, 관계, 역할 설명 | 사람 (옵시디언에서 탐색) |
+| topic 허브 | `wiki/topics/` | 주제의 **내용 종합**. 출처 있는 서술 | 둘 다 |
+
+MOC에는 주장을 쓰지 않는다. 링크와 "이 지도 안에서의 역할" 한 줄만 쓴다. 내용은 개념·이론·topic 페이지가 맡는다.
+
+**계층**: [[홈]] → 도메인 MOC(판단과 의사결정, 선택 설계와 행동 개입, 학습과학과 인지, 진로 진학 의사결정) + 가로지르는 MOC(교육 현장 적용, 연구자, 자료) → topic 허브 → 개별 페이지. [[작업 대시보드]]는 Dataview로만 채우는 작업 현황판이다.
+
+**MOC 페이지 구조** (`templates/moc.md`):
+- `## 범위` — 다루는 것과 다루지 않는 것
+- `## 지도` — Claude가 관리하는 큐레이션 영역. 소절(`### n.`)별로 `- [[페이지]] — 역할 한 줄`. 논리 순서(기초 → 파생 → 응용)로 배열. 대립·보완 관계는 하위 불릿 `  - ↔ [[페이지]]: 관계`
+- `## 관련 종합·적용` — 이 영역의 syntheses·applications
+- `## 열린 질문` — 한 페이지를 넘어서는 영역 수준의 질문
+- `## 자동 목록` — Dataview가 frontmatter `moc:`를 읽어 채움. **손으로 고치지 않는다**
+
+**양방향 일치 규칙**: 페이지의 `moc:`에 X가 있으면 X의 `## 지도`에 그 페이지가 있어야 하고, 그 반대도 성립해야 한다. `python3 scripts/moc_check.py`가 이를 검사한다.
+
+**작업 흐름별 갱신 책임**
+| 작업 | MOC에서 하는 일 |
+|---|---|
+| ingest (`/wiki-ingest` 7단계) | 새로 만들거나 고친 페이지에 `moc:` 배정, 해당 MOC 지도에 항목 추가, 역할 설명 갱신, 새 MOC 필요 시 제안 |
+| query (`/wiki-query` 5단계) | 저장한 synthesis·application을 MOC의 `관련 종합·적용`에 추가, 영역 수준의 열린 질문 기록. 넓은 질문은 MOC 지도에서 출발 |
+| lint (`/wiki-lint`) | `moc_check.py`로 불일치 점검, 소절 재구성·분할·새 MOC 제안 (등급 A/B/C) |
+
+**새 MOC**: 어느 MOC에도 맞지 않는 페이지가 한 주제로 5개 이상 모이거나, 한 MOC의 지도가 40개 항목을 넘으면 새 MOC나 분할을 **제안**한다. 사용자 승인 후 만들고 [[홈]]과 index.md의 Maps 섹션에 등록한다.
 
 ---
 
@@ -158,7 +194,7 @@ status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 ## 5. index.md 와 log.md
 
 ### index.md (내용 중심)
-- 유형별 섹션(Overview / Topics / Theories / Concepts / People / Sources / Syntheses / Applications)
+- 유형별 섹션(Maps / Overview / Topics / Theories / Concepts / People / Sources / Syntheses / Applications)
 - 각 항목: `- [[페이지]] — 한 줄 요약 (sources: n, status)`
 - 모든 ingest·파일백 후 반드시 갱신. Query 시 가장 먼저 읽는다.
 
@@ -189,7 +225,8 @@ status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 ## 7. 도구와 확장 (선택)
 
 - **Obsidian 설정**: 첨부 폴더 `raw/assets/` (이미 `.obsidian/app.json`에 설정됨). 설정 → 단축키에서 "Download attachments for current file"을 `Ctrl+Shift+D` 등에 지정하면 클리핑한 글의 이미지를 로컬로 내려받을 수 있다.
-- **권장 플러그인**: Obsidian Web Clipper(브라우저), Dataview, Templates(코어), Marp Slides, Graph view(코어).
+- **권장 플러그인**: Obsidian Web Clipper(브라우저), Dataview, Templates(코어), Marp Slides, Graph view(코어), Bookmarks(코어).
+- **MOC 탐색**: [[홈]]과 [[작업 대시보드]]는 책갈피(`.obsidian/bookmarks.json`)에 등록되어 있다. MOC의 `자동 목록`과 대시보드는 Dataview가 필요하고, 대시보드의 상충·열린 질문 표는 Dataview 설정의 "Enable JavaScript Queries"를 켜야 보인다.
 - **검색**: 규모가 작을 때는 `index.md`로 충분하다. 페이지가 수백 개를 넘으면 [qmd](https://github.com/tobi/qmd) 도입을 검토한다.
 - **버전관리**: 볼트는 git 저장소다. 의미 있는 작업 단위(ingest 1건, lint 1회)마다 커밋한다. 커밋 메시지는 log 제목과 같은 형식을 쓴다.
 
@@ -199,7 +236,7 @@ status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 
 1. 이 `CLAUDE.md`를 읽는다.
 2. `grep "^## \[" wiki/log.md | tail -5`로 최근 작업을 확인한다.
-3. `wiki/index.md`와 `wiki/overview.md`를 훑는다.
+3. `wiki/index.md`, `wiki/overview.md`, [[홈]]을 훑는다.
 4. `python3 .claude/skills/wiki-ingest/scripts/pending.py`로 아직 ingest되지 않은 자료가 있는지 확인하고, 있으면 알린다.
 
 ---
@@ -208,3 +245,4 @@ status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 - 2026-09-24: 초기 스키마 작성 (디렉토리 구조, 페이지 규약, ingest/query/lint 흐름)
 - 2026-09-24: ingest 절차를 프로젝트 스킬 `/wiki-ingest`로 분리, 미처리 자료 탐지 스크립트(`pending.py`) 추가
 - 2026-09-24: query·lint 절차를 프로젝트 스킬 `/wiki-query`, `/wiki-lint`로 분리, 보조 스크립트 `search.py`, `deep_check.py` 추가
+- 2026-09-24: MOC 체계 도입 (`wiki/maps/`, 3.5절, `moc:` frontmatter, `scripts/moc_check.py`), 세 스킬에 MOC 갱신 단계 추가

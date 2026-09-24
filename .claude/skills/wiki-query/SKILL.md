@@ -22,6 +22,7 @@ argument-hint: "<질문> [저장] [표|슬라이드|차트|캔버스]"
 ## 1. 위키 탐색
 
 1. `wiki/index.md`를 **먼저** 읽는다. 질문과 관련된 항목을 고른다.
+   - 질문이 넓으면(예: "편향 연구 전체를 보면?") [[홈]] → 해당 도메인 MOC의 `## 지도`를 먼저 읽는다. MOC의 소절 구조가 답의 뼈대가 된다.
 2. 보조 검색을 한다. 한국어 용어와 영어 원어를 함께 넣는다:
    `python3 .claude/skills/wiki-query/scripts/search.py 손실회피 "loss aversion" 프레이밍`
 3. 찾은 페이지를 읽는다. 우선순위는 topic → theory/concept → synthesis → source 순이다.
@@ -80,15 +81,19 @@ argument-hint: "<질문> [저장] [표|슬라이드|차트|캔버스]"
 1. **페이지 작성**: `wiki/syntheses/YYYY-MM-DD-질문요지.md`에 `templates/synthesis.md` 구조로 쓴다. frontmatter에 `question:`(원 질문), `sources:`(인용한 source 페이지 수)를 채운다. 채팅 답변을 그대로 붙이지 말고, 링크와 근거 표시를 갖춘 위키 문체로 다듬는다.
 2. **교육 적용 설계안**이면 `wiki/applications/`에 `templates/application.md`로 쓴다.
 3. **역링크**: 답의 근거가 된 주요 개념·이론·주제 페이지에 `## 관련 종합` 절을 두고(없으면 만든다) 새 페이지 링크를 추가한다. 페이지 전체를 덮어쓰지 않고 Read → Edit로 고친다.
-4. **새 발견 반영**: 답을 쓰다가 기존 페이지에 없는 연결이나 상충을 발견했다면 해당 페이지에도 반영한다. 출처가 있으면 일반 문장으로, Claude의 추론이면 `[!note] 종합(LLM)` 콜아웃으로 쓴다.
-5. **overview 점검**: 핵심 논지에 영향을 주면 overview.md를 갱신한다.
-6. **index.md**: Syntheses 또는 Applications 섹션에 항목을 추가한다: `- [[…]] — 한 줄 요약 (sources: n, seed)`
-7. **검증**: `python3 scripts/wiki_lint.py`로 이번 작업이 만든 문제를 모두 고친다.
+4. **MOC 갱신** (`CLAUDE.md` 3.5절):
+   - 새 페이지의 `moc:`에 근거 페이지들이 가장 많이 속한 도메인 MOC 1–2개를 넣는다. application이면 [[교육 현장 적용 MOC]]를 반드시 포함한다.
+   - 그 MOC들의 `## 관련 종합·적용` 절에 항목을 추가한다: `- [[syntheses/…]] — 질문 요지 한 줄`. application은 [[교육 현장 적용 MOC]]의 `## 지도`에서 알맞은 소절(수업·상담·평가·연수)에도 넣는다.
+   - 고친 MOC의 `updated`를 오늘 날짜로 바꾼다.
+5. **새 발견 반영**: 답을 쓰다가 기존 페이지에 없는 연결이나 상충을 발견했다면 해당 페이지에도 반영한다. 출처가 있으면 일반 문장으로, Claude의 추론이면 `[!note] 종합(LLM)` 콜아웃으로 쓴다.
+6. **overview 점검**: 핵심 논지에 영향을 주면 overview.md를 갱신한다.
+7. **index.md**: Syntheses 또는 Applications 섹션에 항목을 추가한다: `- [[…]] — 한 줄 요약 (sources: n, seed)`
+8. **검증**: `python3 scripts/wiki_lint.py`와 `python3 scripts/moc_check.py`로 이번 작업이 만든 문제를 모두 고친다.
 
 ## 6. 빈틈 기록
 
 답하면서 드러난 위키의 빈틈은 버리지 않는다.
-- 관련 페이지에 `> [!question] 열린 질문`으로 남긴다.
+- 관련 페이지에 `> [!question] 열린 질문`으로 남긴다. 한 페이지를 넘어서는 도메인 수준의 질문이면 해당 MOC의 `## 열린 질문` 절에 남긴다.
 - 채울 수 있는 자료(논문, 저자, 검색어)를 사용자에게 제안한다.
 
 ## 7. log.md 기록
@@ -101,6 +106,7 @@ argument-hint: "<질문> [저장] [표|슬라이드|차트|캔버스]"
 - 근거 판정: 충분/부분/부족
 - 생성: [[syntheses/…]]
 - 갱신: [[…]], [[…]]
+- MOC: [[…MOC]]
 - 열린 질문: …          ← 없으면 생략
 ```
 

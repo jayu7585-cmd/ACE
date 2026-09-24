@@ -22,7 +22,7 @@ WIKI = ROOT / "wiki"
 SPECIAL = {"index", "log", "overview"}
 KNOWLEDGE = {"concept", "theory", "topic", "person", "application"}
 LINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]")
-CODE_RE = re.compile(r"```.*?```|`[^`\n]*`", re.S)
+CODE_RE = re.compile(r"```.*?```|`[^`\n]*`|<!--.*?-->", re.S)
 
 
 def split_frontmatter(text):
