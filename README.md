@@ -12,10 +12,12 @@
 ## 빠른 시작
 1. 옵시디언에서 이 폴더를 볼트로 엽니다.
 2. 자료를 `raw/`의 알맞은 하위 폴더에 넣습니다. 웹 글은 Web Clipper로 `raw/articles/`에 저장합니다.
-3. Claude Code에 요청합니다.
-   - `raw/papers/xxx.pdf ingest 해줘`
-   - `전망이론과 기대효용이론 비교해줘` (좋은 답은 `wiki/syntheses/`에 저장)
-   - `lint 해줘`
+3. Claude Code에 요청합니다. 자연어로 말해도 되고, 스킬을 직접 불러도 됩니다.
+   | 작업 | 스킬 | 예 |
+   |---|---|---|
+   | 자료 통합 | `/wiki-ingest` | `/wiki-ingest raw/papers/xxx.pdf`, "raw에 새 자료 넣었어" |
+   | 질의 | `/wiki-query` | `/wiki-query 전망이론과 기대효용이론 비교 저장` |
+   | 점검 | `/wiki-lint` | `/wiki-lint`, "위키 점검해줘" |
 4. 옵시디언의 그래프 뷰와 `wiki/index.md`에서 결과를 확인합니다.
 
 ## 권장 플러그인

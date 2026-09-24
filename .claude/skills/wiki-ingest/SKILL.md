@@ -126,6 +126,7 @@ argument-hint: "[raw/경로 | 비워두면 미처리 목록] [배치|알아서]"
 
 1. `python3 scripts/wiki_lint.py`를 실행한다. 깨진 링크, 고아 페이지, index 미등재, frontmatter 누락이 **이번 작업으로 생긴 것이면 모두 고친다.**
 2. `python3 .claude/skills/wiki-ingest/scripts/pending.py`로 처리한 자료가 목록에서 빠졌는지 확인한다(`raw:` 경로 오타를 잡아낸다).
+3. 마지막 lint 이후 ingest가 10건 이상이면 보고할 때 `/wiki-lint`를 제안한다(`deep_check.py` 첫 줄에 건수가 나온다).
 
 ## 10. 커밋
 

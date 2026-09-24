@@ -55,7 +55,7 @@ def main():
         if p.stem not in SPECIAL and (fm is None or any(k not in fm for k in REQUIRED)):
             missing_fm.append(p)
         for target in links(text):
-            if target.startswith("raw/"):
+            if target.startswith(("raw/", "outputs/")):
                 if not (ROOT / target).exists():
                     broken.append((p, target))
                 continue

@@ -17,3 +17,9 @@ title: 작업 로그
 - `.claude/skills/wiki-ingest/SKILL.md` 생성 (`/wiki-ingest`)
 - 미처리 자료 탐지 스크립트 `.claude/skills/wiki-ingest/scripts/pending.py` 추가
 - `CLAUDE.md` 4.1절·8절·디렉토리 구조에 스킬 참조 반영
+
+## [2026-09-24] schema | query·lint 스킬 등록
+- `.claude/skills/wiki-query/SKILL.md` 생성 (`/wiki-query`) + 보조 검색 `scripts/search.py`
+- `.claude/skills/wiki-lint/SKILL.md` 생성 (`/wiki-lint`) + 장부 정합성 점검 `scripts/deep_check.py`
+- `scripts/wiki_lint.py`: `outputs/` 파일 링크를 실제 파일 존재로 확인하도록 수정
+- `CLAUDE.md` 4.2·4.3절, 디렉토리 구조, `README.md`에 스킬 안내 반영

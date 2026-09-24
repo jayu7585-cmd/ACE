@@ -59,7 +59,7 @@ ACE/
 │   ├── slides/
 │   └── charts/
 ├── scripts/               # 보조 도구 (wiki_lint.py 등)
-└── .claude/skills/        # 프로젝트 스킬 (wiki-ingest 등)
+└── .claude/skills/        # 프로젝트 스킬: wiki-ingest, wiki-query, wiki-lint
 ```
 
 [계층 3] 스키마 = 이 `CLAUDE.md`.
@@ -134,6 +134,9 @@ status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 8. **보고**: 생성/수정한 페이지 목록을 사용자에게 보여준다.
 
 ### 4.2 Query (질의)
+> 상세 절차는 프로젝트 스킬 **`/wiki-query`** (`.claude/skills/wiki-query/SKILL.md`)에 있다. 위키 기반 질문을 받으면 이 스킬을 불러 따른다.
+> 보조 검색: `python3 .claude/skills/wiki-query/scripts/search.py <검색어...>`
+
 1. `wiki/index.md`를 먼저 읽고 관련 페이지를 고른 뒤 해당 페이지들을 읽는다. 위키로 부족할 때만 `raw/`를 참조한다.
 2. 위키 페이지를 인용하며 답한다. 위키에 근거가 없는 내용은 "위키 밖 일반 지식"임을 명시한다.
 3. 답의 형식은 질문에 맞춘다: 마크다운, 비교표, Marp 슬라이드(`outputs/slides/`), 차트(`outputs/charts/`), Canvas 등.
@@ -141,6 +144,9 @@ status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 5. 위키의 빈틈을 발견하면 `[!question] 열린 질문`으로 남기고, 읽을 만한 자료를 제안한다.
 
 ### 4.3 Lint (위키 건강검진)
+> 상세 절차는 프로젝트 스킬 **`/wiki-lint`** (`.claude/skills/wiki-lint/SKILL.md`)에 있다. 점검 요청을 받으면 이 스킬을 불러 따른다.
+> 장부 정합성 점검: `python3 .claude/skills/wiki-lint/scripts/deep_check.py`
+
 사용자가 "lint 해줘"라고 하면 (또는 ingest 10건마다 제안):
 1. `python3 scripts/wiki_lint.py` 실행 → 깨진 링크, 고아 페이지, frontmatter 누락, index 미등재 페이지 확인
 2. 내용 점검: 페이지 간 모순, 최신 자료로 대체된 낡은 주장, 언급은 많지만 페이지가 없는 개념, 누락된 교차참조, 웹 검색으로 채울 수 있는 데이터 공백
@@ -201,3 +207,4 @@ status: seed           # seed(초안) | growing(보강 중) | mature(안정)
 ## 스키마 변경 이력
 - 2026-09-24: 초기 스키마 작성 (디렉토리 구조, 페이지 규약, ingest/query/lint 흐름)
 - 2026-09-24: ingest 절차를 프로젝트 스킬 `/wiki-ingest`로 분리, 미처리 자료 탐지 스크립트(`pending.py`) 추가
+- 2026-09-24: query·lint 절차를 프로젝트 스킬 `/wiki-query`, `/wiki-lint`로 분리, 보조 스크립트 `search.py`, `deep_check.py` 추가
