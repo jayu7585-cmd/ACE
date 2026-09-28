@@ -1,7 +1,7 @@
 ---
 type: index
 title: 위키 목차
-updated: 2026-09-24
+updated: 2026-09-28
 ---
 
 # 위키 목차 (Index)
@@ -39,7 +39,7 @@ _아직 없음_
 _아직 없음_
 
 ## Syntheses
-_아직 없음_
+- [[syntheses/2026-09-28-교육데이터과학-연구동향]] — EDM·학습분석학의 국면별 흐름, 8개 연구 갈래, JDM 관점 통합; 위키 밖 일반 지식 기반 잠정본 (sources: 0, seed)
 
 ## Applications
 _아직 없음_
