@@ -1,7 +1,7 @@
 ---
 type: index
 title: 위키 목차
-updated: 2026-09-24
+updated: 2026-09-26
 ---
 
 # 위키 목차 (Index)
@@ -39,7 +39,7 @@ _아직 없음_
 _아직 없음_
 
 ## Syntheses
-_아직 없음_
+- [[syntheses/2026-09-26-교육학-발달·학습이론-연구동향]] — 발달이론·학습이론 연구 동향 개관, 학습자=의사결정자 관점 (sources: 0, seed)
 
 ## Applications
 _아직 없음_
