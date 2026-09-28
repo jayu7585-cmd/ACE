@@ -1,7 +1,7 @@
 ---
 type: index
 title: 위키 목차
-updated: 2026-09-24
+updated: 2026-09-28
 ---
 
 # 위키 목차 (Index)
@@ -39,7 +39,7 @@ _아직 없음_
 _아직 없음_
 
 ## Syntheses
-_아직 없음_
+- [[syntheses/2026-09-28-인지심리학-연구동향]] — 인지심리학 논문 동향(재현성 위기, 계산적 전환, LLM): 위키 밖 일반 지식 기반, ingest로 근거 보강 필요 (sources: 0, seed)
 
 ## Applications
 _아직 없음_
